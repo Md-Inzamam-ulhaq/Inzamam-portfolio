@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mohammad Inzamam Ulhaq - Portfolio</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <nav>
+            <ul>
+                <li><a href="#about" aria-label="About Me section">About</a></li>
+                <li><a href="#projects" aria-label="My Projects section">Projects</a></li>
+                <li><a href="#skills" aria-label="Skills section">Skills</a></li>
+                <li><a href="#contact" aria-label="Contact Me section">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <!-- Hero Section -->
+        <section id="hero">
+            <img src="img2.jpg" alt="A portrait of Mohammad Inzamam Ulhaq" class="hero-image">
+            <h1>Welcome to My Portfolio</h1>
+           <DIV id="intro"> <p>Hi, I'm Mohammad Inzamam Ulhaq, a dedicated developer with a keen eye for crafting innovative solutions that drive business success. My mission is to transform ideas into impactful digital experiences that empower organizations and elevate user engagement.</p>
+           </DIV>
+            <a href="#projects" class="cta-button">View My Projects</a>
+        </section>
+
+        <!-- About Section -->
+        <section id="about">
+            <h2>About Me</h2>
+            <p>
+               <H2> <i>Driven by Innovation and Results</i></H2>
+
+                As a passionate software developer, I specialize in crafting cutting-edge solutions that harness the power of cloud computing. My mission is to transform complex challenges into scalable and efficient applications that not only meet business needs but also elevate user experiences. With a portfolio of impactful projects, I am committed to driving success through technology and innovation, empowering businesses to thrive in the digital landscape.            </p>
+        </section>
+
+        <!-- Projects Section -->
+        <section id="projects">
+            <h2>My Projects</h2>
+            <div class="project">
+                <h3>Fitness Planner</h3>
+                <img src="fitness_planner.jpg" alt="Fitness Planner dashboard">
+                <p>The Fitness Planner helps users to organize and track their fitness goals, workout schedules, and dietary plans, allowing them to lead healthier lives through effective planning.</p>
+                <a href="link_to_fitness_planner_project" target="_blank">View Project</a>
+            </div>
+            <div class="project">
+                <h3>Green Harvest</h3>
+                <img src="green_harvest.jpg" alt="Green Harvest platform interface">
+                <p>Green Harvest is an innovative platform connecting farmers directly with consumers, enabling fresh produce delivery and supporting local farming communities through technology.</p>
+                <a href="link_to_green_harvest_project" target="_blank">View Project</a>
+            </div>
+        </section>
+
+        <!-- Skills Section -->
+        <section id="skills">
+            <h2>Skills</h2>
+            <ul>
+                <li>Web Development</li>
+                <li>Database Management</li>
+                <li>PHP & MySQL</li>
+                <li>Java</li>
+                <li>C and C++</li>
+                <li>Python</li>
+                <li>UI/UX</li>
+            </ul>
+        </section>
+
+        <!-- Contact Section -->
+        <section id="contact">
+            <h2>Contact Me</h2>
+            <form id="contactForm">
+                <label for="name">Your Name:</label>
+                <input type="text" id="name" name="name" required>
+
+                <label for="email">Your Email:</label>
+                <input type="email" id="email" name="email" required>
+
+                <label for="message">Your Message:</label>
+                <textarea id="message" name="message" required></textarea>
+
+                <button type="submit">Send Message</button>
+            </form>
+            <div id="responseMessage"></div>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2024 Mohammad Inzamam Ulhaq</p>
+    </footer>
+
+    <script>
+    // JavaScript for AJAX Form Submission
+    document.getElementById('contactForm').addEventListener('submit', function(event) {
+        event.preventDefault(); // Prevent the default form submission
+
+        const formData = new FormData(this); // Create form data
+
+        fetch('submit_form.php', {
+            method: 'POST',
+            body: formData,
+        })
+        .then(response => response.text()) // Convert response to text
+        .then(data => {
+            document.getElementById('responseMessage').innerHTML = data; // Display response message
+        })
+        .catch(error => {
+            document.getElementById('responseMessage').innerHTML = 'There was an error sending your message. Please try again later.';
+        });
+    });
+    </script>
+</body>
+</html>
