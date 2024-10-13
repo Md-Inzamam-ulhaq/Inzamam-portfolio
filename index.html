@@ -5,6 +5,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Mohammad Inzamam Ulhaq - Portfolio</title>
     <link rel="stylesheet" href="styles.css">
+    <!-- Include EmailJS library -->
+    <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+
+    <script type="text/javascript">
+        (function(){
+            emailjs.init("DwbGjYL3cO0KR4DVA"); // Replace with your actual EmailJS user ID
+        })();
+    </script>
 </head>
 <body>
     <header>
@@ -23,18 +31,19 @@
         <section id="hero">
             <img src="img2.jpg" alt="A portrait of Mohammad Inzamam Ulhaq" class="hero-image">
             <h1>Welcome to My Portfolio</h1>
-           <DIV id="intro"> <p>Hi, I'm Mohammad Inzamam Ulhaq, a dedicated developer with a keen eye for crafting innovative solutions that drive business success. My mission is to transform ideas into impactful digital experiences that empower organizations and elevate user engagement.</p>
-           </DIV>
+            <div id="intro">
+                <p>Hi, I'm Mohammad Inzamam Ulhaq, a dedicated developer with a keen eye for crafting innovative solutions that drive business success. My mission is to transform ideas into impactful digital experiences that empower organizations and elevate user engagement.</p>
+            </div>
             <a href="#projects" class="cta-button">View My Projects</a>
         </section>
 
         <!-- About Section -->
         <section id="about">
             <h2>About Me</h2>
+            <h2><i>Driven by Innovation and Results</i></h2>
             <p>
-               <H2> <i>Driven by Innovation and Results</i></H2>
-
-                As a passionate software developer, I specialize in crafting cutting-edge solutions that harness the power of cloud computing. My mission is to transform complex challenges into scalable and efficient applications that not only meet business needs but also elevate user experiences. With a portfolio of impactful projects, I am committed to driving success through technology and innovation, empowering businesses to thrive in the digital landscape.            </p>
+                As a passionate software developer, I specialize in crafting cutting-edge solutions that harness the power of cloud computing. My mission is to transform complex challenges into scalable and efficient applications that not only meet business needs but also elevate user experiences. With a portfolio of impactful projects, I am committed to driving success through technology and innovation, empowering businesses to thrive in the digital landscape.
+            </p>
         </section>
 
         <!-- Projects Section -->
@@ -91,25 +100,39 @@
         <p>&copy; 2024 Mohammad Inzamam Ulhaq</p>
     </footer>
 
+    <!-- JavaScript to handle form submission via EmailJS -->
     <script>
-    // JavaScript for AJAX Form Submission
-    document.getElementById('contactForm').addEventListener('submit', function(event) {
-        event.preventDefault(); // Prevent the default form submission
+        document.getElementById('contactForm').addEventListener('submit', function(event) {
+            event.preventDefault(); // Prevent default form submission
 
-        const formData = new FormData(this); // Create form data
+            const name = document.getElementById('name').value.trim();
+            const email = document.getElementById('email').value.trim();
+            const message = document.getElementById('message').value.trim();
 
-        fetch('submit_form.php', {
-            method: 'POST',
-            body: formData,
-        })
-        .then(response => response.text()) // Convert response to text
-        .then(data => {
-            document.getElementById('responseMessage').innerHTML = data; // Display response message
-        })
-        .catch(error => {
-            document.getElementById('responseMessage').innerHTML = 'There was an error sending your message. Please try again later.';
+            // Basic validation
+            if (!name || !email || !message) {
+                document.getElementById('responseMessage').innerHTML = "Please fill out all fields.";
+                return;
+            }
+
+            // Show a loading message
+            document.getElementById('responseMessage').innerHTML = "Sending message...";
+
+            // Prepare email parameters
+            const templateParams = {
+                name: name,
+                email: email,
+                message: message,
+            };
+
+            // Send the email using EmailJS
+            emailjs.send('service_08qd5k6', 'template_db1arde', templateParams)
+            .then(function(response) {
+                document.getElementById('responseMessage').innerHTML = "Message sent successfully!";
+            }, function(error) {
+                document.getElementById('responseMessage').innerHTML = "Oops! Something went wrong. Please try again.";
+            });
         });
-    });
     </script>
 </body>
 </html>
